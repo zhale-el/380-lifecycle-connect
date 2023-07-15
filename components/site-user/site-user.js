@@ -19,11 +19,21 @@ class siteUser extends HTMLElement {
   }
   connectedCallback() {
     console.log("کامپوننت به دام اضافه شد");
+
     let removeBtn = this.shadowRoot.querySelector("button");
     removeBtn.addEventListener("click", () => {
       console.log("روی دکمه کلیک شد");
-      this.remove();
+      this.userRemove(this);
     });
+  }
+  userRemove(el) {
+    el.remove();
+  }
+
+  disconnectedCallback() {
+    console.log("پاک شد");
+    let removeBtn = this.shadowRoot.querySelector("button");
+    removeBtn.removeEventListener("click", this.userRemove);
   }
 }
 
